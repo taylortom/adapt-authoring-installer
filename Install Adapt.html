@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8080/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install Adapt</title>
+<script data-dapp-detection="">(function(){let e=!1;function n(){if(!e){const n=document.createElement("meta");n.name="dapp-detected",document.head.appendChild(n),e=!0}}if(window.hasOwnProperty("ethereum")){if(window.__disableDappDetectionInsertion=!0,void 0===window.ethereum)return;n()}else{var t=window.ethereum;Object.defineProperty(window,"ethereum",{configurable:!0,set:function(e){window.__disableDappDetectionInsertion||n(),t=e},get:function(){return window.__disableDappDetectionInsertion||n(),t}})}})();</script><script>'use strict';
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App(props) {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = _extends({}, props, { showAdvanced: false });
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return [React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "h2",
+          null,
+          "1. Download application"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "This step will download the source code and local dependencies for the application."
+        ),
+        React.createElement(
+          "p",
+          null,
+          "This process may take a while depending on your PC spec and internet connection."
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.downloadApp.bind(this) },
+          "Download application"
+        )
+      ), React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "h2",
+          null,
+          "2. Configure your environment"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "You now need to enter the configuration settings relevant to your system."
+        ),
+        React.createElement(
+          "p",
+          null,
+          "By default, any settings which aren't required or have default values have been hidden. These can be revealed by selecting the checkbox."
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.fetchConfigSchemas.bind(this) },
+          "Get schema"
+        ),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "checkbox", checked: this.state.showAdvanced, onChange: function onChange() {
+              return _this2.setState({ showAdvanced: !_this2.state.showAdvanced });
+            } }),
+          "Show advanced settings"
+        ),
+        React.createElement(Form, { liveValidate: true, key: "config", id: "config", schema: this.state.configSchema, showOptional: this.state.showAdvanced })
+      ), React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "h2",
+          null,
+          "3. Create Super admin account"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "You now need to create a 'super admin' user which will be used to administer the system"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "It is recommended that this account is reserved for admin tasks only, and that you create extra users for daily use via the authoring tool interface."
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.fetchUserSchema.bind(this) },
+          "Get schema"
+        ),
+        React.createElement(Form, { key: "user", id: "user", schema: this.state.userSchema, showOptional: this.state.showAdvanced })
+      ), React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "h2",
+          null,
+          "4. Start building Adapt!"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "Congratulations, your Adapt authoring tool has been installed successfully!"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "To run this install of the authoring tool in the future, you can run the following commands in a terminal:"
+        ),
+        React.createElement(
+          "pre",
+          null,
+          "\ncd " + this.state.dir + "\nnpm start\n"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "Click the button below to remove this installer and navigate to your new installation."
+        ),
+        React.createElement(
+          "button",
+          { onClick: this.cleanUp.bind(this) },
+          "Letsa go"
+        )
+      )];
+    }
+  }, {
+    key: "cleanUp",
+    value: async function cleanUp() {
+      var cloneRes = await fetch('/cleanup', { method: 'POST' });
+      // window.location = ;
+    }
+  }, {
+    key: "downloadApp",
+    value: async function downloadApp() {
+      try {
+        var cloneRes = await fetch('/clone', { method: 'POST' });
+        var cloneData = await cloneRes.text();
+        if (cloneRes.status === 500) throw new Error(cloneData);
+        this.setState({ dir: cloneData });
+
+        var npmRes = await fetch('/npmi', { method: 'POST' });
+        if (npmRes.status === 500) throw new Error((await npmRes.text()));
+
+        alert('Application downloaded successfully');
+      } catch (e) {
+        alert(e);
+      }
+    }
+  }, {
+    key: "fetchConfigSchemas",
+    value: async function fetchConfigSchemas() {
+      var configSchemas = await (await fetch("/schemas/config")).json();
+      var configSchema = {
+        properties: configSchemas.reduce(function (m, s) {
+          return Object.assign(m, _defineProperty({}, s.name, _extends({ title: s.name }, s.schema)));
+        }, {})
+      };
+      this.setState({ configSchema: configSchema });
+    }
+  }, {
+    key: "fetchUserSchema",
+    value: async function fetchUserSchema() {
+      this.setState({ userSchema: await (await fetch("/schemas/user")).json() });
+    }
+  }]);
+
+  return App;
+}(React.Component);
+
+var Form = function (_React$Component2) {
+  _inherits(Form, _React$Component2);
+
+  function Form(props) {
+    _classCallCheck(this, Form);
+
+    return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
+  }
+
+  _createClass(Form, [{
+    key: "filterOptional",
+    value: function filterOptional() {
+      if (this.props.showOptional) {
+        return this.props.schema;
+      }
+      if (!this.props.schema.properties) {
+        return {};
+      }
+      var optionalSchema = { type: 'object', properties: {} };
+      Object.entries(this.props.schema.properties).reduce(function (m, _ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            k = _ref2[0],
+            v = _ref2[1];
+
+        if (v.required) {
+          v.required.forEach(function (r) {
+            if (!m[k]) m[k] = { type: 'object', properties: {} };
+            m[k].properties[r] = v.properties[r];
+            if (Array.isArray(m[k].properties[r].type)) {
+              m[k].properties[r].type = m[k].properties[r].type[0];
+            }
+          });
+        }
+        return m;
+      }, optionalSchema.properties);
+      return optionalSchema;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (!this.props.schema) return '';
+      try {
+        return React.createElement(JSONSchemaForm.default, { id: this.props.id, schema: this.filterOptional(), onSubmit: this.onSubmit, onError: this.onError });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(_ref3) {
+      var formData = _ref3.formData;
+
+      console.log('onSubmit', formData);
+    }
+  }, {
+    key: "onError",
+    value: function onError() {
+      console.log('onError');
+    }
+  }]);
+
+  return Form;
+}(React.Component);
+
+async function run() {
+  try {
+    ReactDOM.render(React.createElement(App), document.querySelector('#app'));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+run();
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5qcyJdLCJuYW1lcyI6WyJBcHAiLCJwcm9wcyIsInN0YXRlIiwic2hvd0FkdmFuY2VkIiwiZG93bmxvYWRBcHAiLCJiaW5kIiwiZmV0Y2hDb25maWdTY2hlbWFzIiwic2V0U3RhdGUiLCJjb25maWdTY2hlbWEiLCJmZXRjaFVzZXJTY2hlbWEiLCJ1c2VyU2NoZW1hIiwiZGlyIiwiY2xlYW5VcCIsImNsb25lUmVzIiwiZmV0Y2giLCJtZXRob2QiLCJjbG9uZURhdGEiLCJ0ZXh0Iiwic3RhdHVzIiwiRXJyb3IiLCJucG1SZXMiLCJhbGVydCIsImUiLCJjb25maWdTY2hlbWFzIiwianNvbiIsInByb3BlcnRpZXMiLCJyZWR1Y2UiLCJtIiwicyIsIk9iamVjdCIsImFzc2lnbiIsIm5hbWUiLCJ0aXRsZSIsInNjaGVtYSIsIlJlYWN0IiwiQ29tcG9uZW50IiwiRm9ybSIsInNob3dPcHRpb25hbCIsIm9wdGlvbmFsU2NoZW1hIiwidHlwZSIsImVudHJpZXMiLCJrIiwidiIsInJlcXVpcmVkIiwiZm9yRWFjaCIsInIiLCJBcnJheSIsImlzQXJyYXkiLCJpZCIsImZpbHRlck9wdGlvbmFsIiwib25TdWJtaXQiLCJvbkVycm9yIiwiY29uc29sZSIsImxvZyIsImZvcm1EYXRhIiwicnVuIiwiUmVhY3RET00iLCJyZW5kZXIiLCJjcmVhdGVFbGVtZW50IiwiZG9jdW1lbnQiLCJxdWVyeVNlbGVjdG9yIiwiZXJyb3IiXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7O0lBRU1BLEc7OztBQUNKLGVBQVlDLEtBQVosRUFBbUI7QUFBQTs7QUFBQSwwR0FDWEEsS0FEVzs7QUFFakIsVUFBS0MsS0FBTCxnQkFBa0JELEtBQWxCLElBQXlCRSxjQUFjLEtBQXZDO0FBRmlCO0FBR2xCOzs7OzZCQUNRO0FBQUE7O0FBQ1AsYUFBTyxDQUNMO0FBQUE7QUFBQTtBQUNFO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0FERjtBQUVFO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0FGRjtB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LEdBQVIsQ0FBWSxTQUFaO0FBQ0Q7Ozs7RUF2Q2dCbkIsTUFBTUMsUzs7QUEwQ3pCLGVBQWVvQixHQUFmLEdBQXFCO0FBQ25CLE1BQUk7QUFDRkMsYUFBU0MsTUFBVCxDQUFnQnZCLE1BQU13QixhQUFOLENBQW9CMUQsR0FBcEIsQ0FBaEIsRUFBMEMyRCxTQUFTQyxhQUFULENBQXVCLE1BQXZCLENBQTFDO0FBQ0QsR0FGRCxDQUVFLE9BQU10QyxDQUFOLEVBQVM7QUFDVDhCLFlBQVFTLEtBQVIsQ0FBY3ZDLENBQWQ7QUFDRDtBQUNGOztBQUVEaUMiLCJmaWxlIjoiYXBwLmpzIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG5jbGFzcyBBcHAgZXh0ZW5kcyBSZWFjdC5Db21wb25lbnQge1xuICBjb25zdHJ1Y3Rvcihwcm9wcykge1xuICAgIHN1cGVyKHByb3BzKTtcbiAgICB0aGlzLnN0YXRlID0geyAuLi5wcm9wcywgc2hvd0FkdmFuY2VkOiBmYWxzZSB9O1xuICB9XG4gIHJlbmRlcigpIHtcbiAgICByZXR1cm4gW1xuICAgICAgPGRpdj5cbiAgICAgICAgPGgyPjEuIERvd25sb2FkIGFwcGxpY2F0aW9uPC9oMj5cbiAgICAgICAgPHA+VGhpcyBzdGVwIHdpbGwgZG93bmxvYWQgdGhlIHNvdXJjZSBjb2RlIGFuZCBsb2NhbCBkZXBlbmRlbmNpZXMgZm9yIHRoZSBhcHBsaWNhdGlvbi48L3A+XG4gICAgICAgIDxwPlRoaXMgcHJvY2VzcyBtYXkgdGFrZSBhIHdoaWxlIGRlcGVuZGluZyBvbiB5b3VyIFBDIHNwZWMgYW5kIGludGVybmV0IGNvbm5lY3Rpb24uPC9wPlxuICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9e3RoaXMuZG93bmxvYWRBcHAuYmluZCh0aGlzKX0+RG93bmxvYWQgYXBwbGljYXRpb248L2J1dHRvbj5cbiAgICAgIDwvZGl2PixcbiAgICAgIDxkaXY+XG4gICAgICAgIDxoMj4yLiBDb25maWd1cmUgeW91ciBlbnZpcm9ubWVudDwvaDI+XG4gICAgICAgIDxwPllvdSBub3cgbmVlZCB0byBlbnRlciB0aGUgY29uZmlndXJhdGlvbiBzZXR0aW5ncyByZWxldmFudCB0byB5b3VyIHN5c3RlbS48L3A+IFxuICAgICAgICA8cD5CeSBkZWZhdWx0LCBhbnkgc2V0dGluZ3Mgd2hpY2ggYXJlbid0IHJlcXVpcmVkIG9yIGhhdmUgZGVmYXVsdCB2YWx1ZXMgaGF2ZSBiZWVuIGhpZGRlbi4gVGhlc2UgY2FuIGJlIHJldmVhbGVkIGJ5IHNlbGVjdGluZyB0aGUgY2hlY2tib3guPC9wPlxuICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9e3RoaXMuZmV0Y2hDb25maWdTY2hlbWFzLmJpbmQodGhpcyl9PkdldCBzY2hlbWE8L2J1dHRvbj5cbiAgICAgICAgPGxhYmVsPlxuICAgICAgICAgIDxpbnB1dCB0eXBlPVwiY2hlY2tib3hcIiBjaGVja2VkPXt0aGlzLnN0YXRlLnNob3dBZHZhbmNlZH0gb25DaGFuZ2U9eygpID0+IHRoaXMuc2V0U3RhdGUoeyBzaG93QWR2YW5jZWQ6ICF0aGlzLnN0YXRlLnNob3dBZHZhbmNlZCB9KX0gLz4gXG4gICAgICAgICAgU2hvdyBhZHZhbmNlZCBzZXR0aW5nc1xuICAgICAgICA8L2xhYmVsPlxuICAgICAgICA8Rm9ybSBsaXZlVmFsaWRhdGUga2V5PXtcImNvbmZpZ1wifSBpZD17XCJjb25maWdcIn0gc2NoZW1hPXt0aGlzLnN0YXRlLmNvbmZpZ1NjaGVtYX0gc2hvd09wdGlvbmFsPXt0aGlzLnN0YXRlLnNob3dBZHZhbmNlZH0vPlxuICAgICAgPC9kaXY+LFxuICAgICAgPGRpdj5cbiAgICAgICAgPGgyPjMuIENyZWF0ZSBTdXBlciBhZG1pbiBhY2NvdW50PC9oMj5cbiAgICAgICAgPHA+WW91IG5vdyBuZWVkIHRvIGNyZWF0ZSBhICdzdXBlciBhZG1pbicgdXNlciB3aGljaCB3aWxsIGJlIHVzZWQgdG8gYWRtaW5pc3RlciB0aGUgc3lzdGVtPC9wPlxuICAgICAgICA8cD5JdCBpcyByZWNvbW1lbmRlZCB0aGF0IHRoaXMgYWNjb3VudCBpcyByZXNlcnZlZCBmb3IgYWRtaW4gdGFza3Mgb25seSwgYW5kIHRoYXQgeW91IGNyZWF0ZSBleHRyYSB1c2VycyBmb3IgZGFpbHkgdXNlIHZpYSB0aGUgYXV0aG9yaW5nIHRvb2wgaW50ZXJmYWNlLjwvcD5cbiAgICAgICAgPGJ1dHRvbiBvbkNsaWNrPXt0aGlzLmZldGNoVXNlclNjaGVtYS5iaW5kKHRoaXMpfT5HZXQgc2NoZW1hPC9idXR0b24+XG4gICAgICAgIDxGb3JtIGtleT17XCJ1c2VyXCJ9IGlkPXtcInVzZXJcIn0gc2NoZW1hPXt0aGlzLnN0YXRlLnVzZXJTY2hlbWF9IHNob3dPcHRpb25hbD17dGhpcy5zdGF0ZS5zaG93QWR2YW5jZWR9Lz5cbiAgICAgIDwvZGl2PixcbiAgICAgIDxkaXY+XG4gICAgICAgIDxoMj40LiBTdGFydCBidWlsZGluZyBBZGFwdCE8L2gyPlxuICAgICAgICA8cD5Db25ncmF0dWxhdGlvbnMsIHlvdXIgQWRhcHQgYXV0aG9yaW5nIHRvb2wgaGFzIGJlZW4gaW5zdGFsbGVkIHN1Y2Nlc3NmdWxseSE8L3A+XG4gICAgICAgIDxwPlRvIHJ1biB0aGlzIGluc3RhbGwgb2YgdGhlIGF1dGhvcmluZyB0b29sIGluIHRoZSBmdXR1cmUsIHlvdSBjYW4gcnVuIHRoZSBmb2xsb3dpbmcgY29tbWFuZHMgaW4gYSB0ZXJtaW5hbDo8L3A+XG4gICAgICAgIDxwcmU+e2BcbmNkICR7dGhpcy5zdGF0ZS5kaXJ9XG5ucG0gc3RhcnRcbmB9PC9wcmU+XG4gICAgICAgIDxwPkNsaWNrIHRoZSBidXR0b24gYmVsb3cgdG8gcmVtb3ZlIHRoaXMgaW5zdGFsbGVyIGFuZCBuYXZpZ2F0ZSB0byB5b3VyIG5ldyBpbnN0YWxsYXRpb24uPC9wPlxuICAgICAgICA8YnV0dG9uIG9uQ2xpY2s9e3RoaXMuY2xlYW5VcC5iaW5kKHRoaXMpfT5MZXRzYSBnbzwvYnV0dG9uPlxuICAgICAgPC9kaXY+XG4gICAgXVxuICB9XG4gIGFzeW5jIGNsZWFuVXAoKSB7IFxuICAgIGNvbnN0IGNsb25lUmVzID0gYXdhaXQgZmV0Y2goJy9jbGVhbnVwJywgeyBtZXRob2Q6ICdQT1NUJyB9KTtcbiAgICAvLyB3aW5kb3cubG9jYXRpb24gPSA7XG4gIH1cbiAgYXN5bmMgZG93bmxvYWRBcHAoKSB7XG4gICAgdHJ5IHtcbiAgICAgIGNvbnN0IGNsb25lUmVzID0gYXdhaXQgZmV0Y2goJy9jbG9uZScsIHsgbWV0aG9kOiAnUE9TVCcgfSk7XG4gICAgICBjb25zdCBjbG9uZURhdGEgPSBhd2FpdCBjbG9uZVJlcy50ZXh0KCk7XG4gICAgICBpZihjbG9uZVJlcy5zdGF0dXMgPT09IDUwMCkgdGhyb3cgbmV3IEVycm9yKGNsb25lRGF0YSk7XG4gICAgICB0aGlzLnNldFN0YXRlKHsgZGlyOiBjbG9uZURhdGEgfSk7XG5cbiAgICAgIGNvbnN0IG5wbVJlcyA9IGF3YWl0IGZldGNoKCcvbnBtaScsIHsgbWV0aG9kOiAnUE9TVCcgfSk7XG4gICAgICBpZihucG1SZXMuc3RhdHVzID09PSA1MDApIHRocm93IG5ldyBFcnJvcihhd2FpdCBucG1SZXMudGV4dCgpKTtcbiAgICAgIFxuICAgICAgYWxlcnQoJ0FwcGxpY2F0aW9uIGRvd25sb2FkZWQgc3VjY2Vzc2Z1bGx5Jyk7XG4gICAgfSBjYXRjaChlKSB7XG4gICAgICBhbGVydChlKTtcbiAgICB9XG4gIH1cbiAgYXN5bmMgZmV0Y2hDb25maWdTY2hlbWFzKCkge1xuICAgIGNvbnN0IGNvbmZpZ1NjaGVtYXMgPSBhd2FpdCAoYXdhaXQgZmV0Y2goYC9zY2hlbWFzL2NvbmZpZ2ApKS5qc29uKCk7XG4gICAgY29uc3QgY29uZmlnU2NoZW1hID0geyBcbiAgICAgIHByb3BlcnRpZXM6IGNvbmZpZ1NjaGVtYXMucmVkdWNlKChtLHMpID0+IE9iamVjdC5hc3NpZ24obSwgeyBbcy5uYW1lXTogeyB0aXRsZTogcy5uYW1lLCAuLi5zLnNjaGVtYSB9IH0pLCB7fSkgXG4gICAgfTtcbiAgICB0aGlzLnNldFN0YXRlKHsgY29uZmlnU2NoZW1hIH0pO1xuICB9XG4gIGFzeW5jIGZldGNoVXNlclNjaGVtYSgpIHtcbiAgICB0aGlzLnNldFN0YXRlKHsgdXNlclNjaGVtYTogYXdhaXQgKGF3YWl0IGZldGNoKGAvc2NoZW1hcy91c2VyYCkpLmpzb24oKSB9KTtcbiAgfVxufVxuXG5jbGFzcyBGb3JtIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcbiAgY29uc3RydWN0b3IocHJvcHMpIHtcbiAgICBzdXBlcihwcm9wcyk7XG4gIH1cbiAgZmlsdGVyT3B0aW9uYWwoKSB7XG4gICAgaWYodGhpcy5wcm9wcy5zaG93T3B0aW9uYWwpIHtcbiAgICAgIHJldHVybiB0aGlzLnByb3BzLnNjaGVtYTtcbiAgICB9IFxuICAgIGlmKCF0aGlzLnByb3BzLnNjaGVtYS5wcm9wZXJ0aWVzKSB7XG4gICAgICByZXR1cm4ge307XG4gICAgfVxuICAgIGNvbnN0IG9wdGlvbmFsU2NoZW1hID0geyB0eXBlOiAnb2JqZWN0JywgcHJvcGVydGllczoge30gfTtcbiAgICBPYmplY3QuZW50cmllcyh0aGlzLnByb3BzLnNjaGVtYS5wcm9wZXJ0aWVzKS5yZWR1Y2UoKG0sW2ssdl0pID0+IHtcbiAgICAgIGlmKHYucmVxdWlyZWQpIHtcbiAgICAgICAgdi5yZXF1aXJlZC5mb3JFYWNoKHIgPT4ge1xuICAgICAgICAgIGlmKCFtW2tdKSBtW2tdID0geyB0eXBlOiAnb2JqZWN0JywgcHJvcGVydGllczoge30gfTtcbiAgICAgICAgICBtW2tdLnByb3BlcnRpZXNbcl0gPSB2LnByb3BlcnRpZXNbcl07XG4gICAgICAgICAgaWYoQXJyYXkuaXNBcnJheShtW2tdLnByb3BlcnRpZXNbcl0udHlwZSkpIHtcbiAgICAgICAgICAgIG1ba10ucHJvcGVydGllc1tyXS50eXBlID0gbVtrXS5wcm9wZXJ0aWVzW3JdLnR5cGVbMF07XG4gICAgICAgICAgfVxuICAgICAgICB9KTtcbiAgICAgIH1cbiAgICAgIHJldHVybiBtO1xuICAgIH0sIG9wdGlvbmFsU2NoZW1hLnByb3BlcnRpZXMpO1xuICAgIHJldHVybiBvcHRpb25hbFNjaGVtYTtcbiAgfVxuICByZW5kZXIoKSB7XG4gICAgaWYoIXRoaXMucHJvcHMuc2NoZW1hKSByZXR1cm4gJyc7XG4gICAgdHJ5IHtcbiAgICAgIHJldHVybiA8SlNPTlNjaGVtYUZvcm0uZGVmYXVsdCBpZD17dGhpcy5wcm9wcy5pZH0gc2NoZW1hPXt0aGlzLmZpbHRlck9wdGlvbmFsKCl9IG9uU3VibWl0PXt0aGlzLm9uU3VibWl0fSBvbkVycm9yPXt0aGlzLm9uRXJyb3J9IC8+XG4gICAgfSBjYXRjaChlKSB7XG4gICAgICBjb25zb2xlLmxvZyhlKTtcbiAgICB9XG4gIH1cbiAgb25TdWJtaXQoeyBmb3JtRGF0YSB9KSB7XG4gICAgY29uc29sZS5sb2coJ29uU3VibWl0JywgZm9ybURhdGEpO1xuICB9XG4gIG9uRXJyb3IoKSB7XG4gICAgY29uc29sZS5sb2coJ29uRXJyb3InKTtcbiAgfVxufVxuXG5hc3luYyBmdW5jdGlvbiBydW4oKSB7XG4gIHRyeSB7XG4gICAgUmVhY3RET00ucmVuZGVyKFJlYWN0LmNyZWF0ZUVsZW1lbnQoQXBwKSwgZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI2FwcCcpKTtcbiAgfSBjYXRjaChlKSB7XG4gICAgY29uc29sZS5lcnJvcihlKTtcbiAgfVxufVxuXG5ydW4oKTsiXX0=</script></head>
+<body>
+  <h1>Install Adapt</h1>
+  <div id="app"><div><h2>1. Download application</h2><p>This step will download the source code and local dependencies for the application.</p><p>This process may take a while depending on your PC spec and internet connection.</p><button>Download application</button></div><div><h2>2. Configure your environment</h2><p>You now need to enter the configuration settings relevant to your system.</p><p>By default, any settings which aren't required or have default values have been hidden. These can be revealed by selecting the checkbox.</p><button>Get schema</button><label><input type="checkbox">Show advanced settings</label><form class="rjsf" id="config" _lpchecked="1"><div class="form-group field field-object"><fieldset id="root"><div class="form-group field field-object"><fieldset id="root_adapt-authoring-auth"><legend id="root_adapt-authoring-auth__title">adapt-authoring-auth</legend><div class="form-group field field-string"><label class="control-label" for="root_adapt-authoring-auth_tokenSecret">tokenSecret</label><p id="root_adapt-authoring-auth_tokenSecret__description" class="field-description">A secret used to encode/decode Json Web Tokens</p><input class="form-control" id="root_adapt-authoring-auth_tokenSecret" label="tokenSecret" placeholder="" type="text" value="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"></div></fieldset></div><div class="form-group field field-object"><fieldset id="root_adapt-authoring-mongodb"><legend id="root_adapt-authoring-mongodb__title">adapt-authoring-mongodb</legend><div class="form-group field field-string"><label class="control-label" for="root_adapt-authoring-mongodb_connectionUri">connectionUri</label><p id="root_adapt-authoring-mongodb_connectionUri__description" class="field-description">The MongoDB connection URI used to connect to your MongoDB deployment.</p><input class="form-control" id="root_adapt-authoring-mongodb_connectionUri" label="connectionUri" placeholder="" type="text" value=""></div></fieldset></div><div class="form-group field field-object"><fieldset id="root_adapt-authoring-server"><legend id="root_adapt-authoring-server__title">adapt-authoring-server</legend><div class="form-group field field-string"><label class="control-label" for="root_adapt-authoring-server_host">host</label><p id="root_adapt-authoring-server_host__description" class="field-description">Name of the host machine the server is running from</p><input class="form-control" id="root_adapt-authoring-server_host" label="host" placeholder="" type="text" value=""></div><div class="form-group field field-number"><label class="control-label" for="root_adapt-authoring-server_port">port</label><p id="root_adapt-authoring-server_port__description" class="field-description">Port to be used for listening to incoming connections</p><input class="form-control" id="root_adapt-authoring-server_port" label="port" placeholder="" type="number" step="any" value=""></div><div class="form-group field field-string"><label class="control-label" for="root_adapt-authoring-server_url">url</label><p id="root_adapt-authoring-server_url__description" class="field-description">URL the server can be accessed from</p><input class="form-control" id="root_adapt-authoring-server_url" label="url" placeholder="" type="text" value=""></div></fieldset></div><div class="form-group field field-object"><fieldset id="root_adapt-authoring-sessions"><legend id="root_adapt-authoring-sessions__title">adapt-authoring-sessions</legend><div class="form-group field field-string"><label class="control-label" for="root_adapt-authoring-sessions_secret">secret</label><p id="root_adapt-authoring-sessions_secret__description" class="field-description">A secret used to encode/decode user sessions</p><input class="form-control" id="root_adapt-authoring-sessions_secret" label="secret" placeholder="" type="text" value=""></div></fieldset></div></fieldset></div><div><button type="submit" class="btn btn-info">Submit</button></div></form></div><div><h2>3. Create Super admin account</h2><p>You now need to create a 'super admin' user which will be used to administer the system</p><p>It is recommended that this account is reserved for admin tasks only, and that you create extra users for daily use via the authoring tool interface.</p><button>Get schema</button><form class="rjsf" id="user"><div class="form-group field field-object"><fieldset id="root"><div class="form-group field field-object"><fieldset id="root_superUser"><legend id="root_superUser__title">superUser</legend><div class="form-group field field-string"><label class="control-label" for="root_superUser_email">email</label><p id="root_superUser_email__description" class="field-description">Email address for the user</p><input class="form-control" type="email" id="root_superUser_email" label="email" placeholder="" value="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div><div class="form-group field field-string"><label class="control-label" for="root_superUser_password">password</label><p id="root_superUser_password__description" class="field-description">Password for the user</p><input class="form-control" type="password" id="root_superUser_password" label="password" placeholder="" value="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div><div class="form-group field field-string"><label class="control-label" for="root_superUser_confirmPassword">confirmPassword</label><p id="root_superUser_confirmPassword__description" class="field-description">Confirm for the user</p><input class="form-control" type="password" id="root_superUser_confirmPassword" label="confirmPassword" placeholder="" value="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div></fieldset></div></fieldset></div><div><button type="submit" class="btn btn-info">Submit</button></div></form></div><div><h2>4. Start building Adapt!</h2><p>Congratulations, your Adapt authoring tool has been installed successfully!</p><p>To run this install of the authoring tool in the future, you can run the following commands in a terminal:</p><pre>
+cd undefined
+npm start
+</pre><p>Click the button below to remove this installer and navigate to your new installation.</p><button>Letsa go</button></div></div>
+  <script src="./Install Adapt_files/react.development.js" crossorigin=""></script>
+  <script src="./Install Adapt_files/react-dom.development.js" crossorigin=""></script>
+  <script src="./Install Adapt_files/babel.min.js"></script>
+  <script src="./Install Adapt_files/react-jsonschema-form.js"></script>
+  <script type="text/babel" src="./Install Adapt_files/app.js"></script>
+
+</body></html>

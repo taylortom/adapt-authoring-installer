@@ -22,7 +22,7 @@ class App extends React.Component {
           <input type="checkbox" checked={this.state.showAdvanced} onChange={() => this.setState({ showAdvanced: !this.state.showAdvanced })} /> 
           Show advanced settings
         </label>
-        <Form key={"config"} id={"config"} schema={this.state.configSchema} showOptional={this.state.showAdvanced}/>
+        <Form liveValidate key={"config"} id={"config"} schema={this.state.configSchema} showOptional={this.state.showAdvanced}/>
       </div>,
       <div>
         <h2>3. Create Super admin account</h2>
@@ -109,8 +109,8 @@ class Form extends React.Component {
       console.log(e);
     }
   }
-  onSubmit() {
-    console.log('onSubmit', this);
+  onSubmit({ formData }) {
+    console.log('onSubmit', formData);
   }
   onError() {
     console.log('onError');
